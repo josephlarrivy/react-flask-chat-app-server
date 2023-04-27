@@ -1,3 +1,15 @@
+from flask_sqlalchemy import SQLAlchemy
+
+from flask_bcrypt import Bcrypt
+from datetime import datetime
+
+bcrypt = Bcrypt()
+db = SQLAlchemy()
+
+def connect_db(app):
+    db.app = app
+    db.init_app(app)
+
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -5,7 +17,7 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
     email = db.Column(db.String)
 
-    chats = db.relationship('Chat', secondary='user_chats', backref='users')
+    chats = db.relationship('ChatName', secondary='user_chatnames', backref='users')
 
     @classmethod
     def register_new_user(cls, username, password, email):
@@ -23,8 +35,11 @@ class User(db.Model):
 
 
 
-class Chat(db.Model):
-    __tablename__ = 'chats'
+
+
+
+class ChatName(db.Model):
+    __tablename__ = 'chatnames'
 
     chat_id = db.Column(db.Integer, unique=True, primary_key=True, nullable=False)
     chat_name = db.Column(db.Text, nullable=False)
@@ -35,8 +50,13 @@ class Chat(db.Model):
 
 
 
+
+
+
+
+
 class UserChat(db.Model):
-    __tablename__ = 'user_chats'
+    __tablename__ = 'user_chatnames'
 
     user_id = db.Column(db.Text, db.ForeignKey('users.username'), primary_key=True)
-    chat_id = db.Column(db.Integer, db.ForeignKey('chats.chat_id'), primary_key=True)
+    chat_id = db.Column(db.Integer, db.ForeignKey('chatnames.chat_id'), primary_key=True)
