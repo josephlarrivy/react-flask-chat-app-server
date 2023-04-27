@@ -1,1 +1,2 @@
-web: gunicorn your_module_name:app
+web: python app.py
+worker: python sockets.py
