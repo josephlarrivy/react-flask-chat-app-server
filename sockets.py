@@ -6,6 +6,20 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins='*')
 
+@app.route('/socket.io/')
+def handle_socketio_polling():
+    transport = request.args.get('transport')
+    polling_id = request.args.get('t')
+    
+    if transport == 'polling' and polling_id:
+        response_data = '96:0{"sid":"dummy_sid","upgrades":[],"pingInterval":25000,"pingTimeout":5000}'
+        response = Response(response_data, content_type='text/plain')
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
+    
+    return 'Not Found', 404
+
+
 @socketio.on('join')
 def handle_join(data):
     username = data['username']
