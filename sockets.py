@@ -11,28 +11,35 @@ def handle_join(data):
     username = data['username']
     room = data['room']
     join_room(room)
-    message = f'{username} has joined the room {room}'
-    emit('message', message, room=room)
+
+    message = f'{username} has joined the room'
+
+    message_dict = {'username': username, 'message': message}
+    emit('message', message_dict, room=room)
 
 @socketio.on('leave')
 def handle_leave(data):
     username = data['username']
     room = data['room']
     leave_room(room)
-    message = f'{username} has left the room {room}'
-    emit('message', message, room=room)
+
+    message = f'{username} has left the room'
+
+    message_dict = {'username': username, 'message': message}
+    emit('message', message_dict, room=room)
 
 @socketio.on('message')
 def handle_message(data):
     username = data['username']
     room = data['room']
     message = data['message']
-    emit('message', f'{username}: {message}', room=room)
+
+    message_dict = {'username': username, 'message': message}
+    emit('message', message_dict, room=room)
 
 @socketio.on('owner_leave')
 def handle_owner_leave():
     room = request.sid
-    print('test')
     emit('message', {'text': 'The owner has left the chat. You have been disconnected.'}, room=room)
 
 
