@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 app = Flask(__name__)
@@ -52,8 +52,7 @@ def handle_message(data):
     emit('message', message_dict, room=room)
 
 @socketio.on('owner_leave')
-def handle_owner_leave():
-    room = request.sid
+def handle_owner_leave(room):
     emit('message', {'text': 'The owner has left the chat. You have been disconnected.'}, room=room)
 
 
