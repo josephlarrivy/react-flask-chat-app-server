@@ -11,12 +11,12 @@ CREATE TABLE users (
 );
 
 CREATE TABLE chatnames (
-  chat_id INTEGER PRIMARY KEY NOT NULL,
+  chat_id TEXT PRIMARY KEY UNIQUE NOT NULL,
   chat_name TEXT NOT NULL
 );
 
 CREATE TABLE user_chatnames (
   user_id TEXT REFERENCES users(username) ON DELETE CASCADE,
-  chat_id INTEGER REFERENCES chatnames(chat_id) ON DELETE CASCADE,
+  chat_id TEXT REFERENCES chatnames(chat_id) ON DELETE CASCADE,
   PRIMARY KEY (user_id, chat_id)
 );

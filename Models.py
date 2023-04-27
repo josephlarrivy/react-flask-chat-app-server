@@ -41,7 +41,7 @@ class User(db.Model):
 class ChatName(db.Model):
     __tablename__ = 'chatnames'
 
-    chat_id = db.Column(db.Integer, unique=True, primary_key=True, nullable=False)
+    chat_id = db.Column(db.Text, unique=True, primary_key=True, nullable=False)
     chat_name = db.Column(db.Text, nullable=False)
 
     @classmethod
