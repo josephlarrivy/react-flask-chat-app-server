@@ -4,8 +4,10 @@ from Models import connect_db, db, User, ChatName, UserChat
 from sqlalchemy import desc, delete
 from sqlalchemy.exc import IntegrityError
 import random
+import os
 
 app = Flask(__name__)
+port = int(os.environ.get("PORT", 5000))
 CORS(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///chat-app-database"
@@ -125,4 +127,4 @@ def get_code_by_name():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=port)
