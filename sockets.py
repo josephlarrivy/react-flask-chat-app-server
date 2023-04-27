@@ -29,5 +29,13 @@ def handle_message(data):
     message = data['message']
     emit('message', f'{username}: {message}', room=room)
 
+@socketio.on('owner_leave')
+def handle_owner_leave():
+    room = request.sid
+    print('test')
+    emit('message', {'text': 'The owner has left the chat. You have been disconnected.'}, room=room)
+
+
+
 if __name__ == '__main__':
     socketio.run(app)

@@ -43,10 +43,14 @@ class ChatName(db.Model):
 
     chat_id = db.Column(db.Text, unique=True, primary_key=True, nullable=False)
     chat_name = db.Column(db.Text, nullable=False)
+    chat_owner = db.Column(db.Text, db.ForeignKey('users.username'), nullable=False)
+    
+    owner = db.relationship('User', backref='owned_chats', foreign_keys=[chat_owner])
 
     @classmethod
-    def create_new_chat(cls, chat_name, chat_id):
-        return cls(chat_name=chat_name, chat_id=chat_id)
+    def create_new_chat(cls, chat_name, chat_id, chat_owner):
+        return cls(chat_name=chat_name, chat_id=chat_id, chat_owner=chat_owner)
+
 
 
 
