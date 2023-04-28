@@ -10,7 +10,8 @@ app = Flask(__name__)
 port = int(os.environ.get("PORT", 5000))
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///chat-app-database"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///chat-app-database"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql-cubic-26621"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = False
 app.config["SECRET_KEY"] = "W8ddvewdd@$hdj"
