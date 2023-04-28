@@ -1,2 +1,2 @@
-web: python app.py
-worker: python sockets.py
+web: gunicorn app:app
+web: gunicorn app:sockets
