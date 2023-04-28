@@ -9,7 +9,7 @@ import os
 app = Flask(__name__)
 # port = int(os.environ.get("PORT", 5000))
 # CORS(app)
-# CORS(app, resources={r"/*": {"origins": '*'}})
+CORS(app, resources={r"/*": {"origins": '*'}})
 cors = CORS(app, resources={r"/*": {"referrer-policy": "no-referrer"}})
 
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///chat-app-database"
@@ -21,7 +21,12 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 connect_db(app)
 
-
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    return response
 
 @app.route('/register', methods=['POST'])
 def register():
