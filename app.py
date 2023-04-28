@@ -9,7 +9,8 @@ import os
 app = Flask(__name__)
 # port = int(os.environ.get("PORT", 5000))
 # CORS(app)
-CORS(app, resources={r"/*": {"origins": '*'}})
+# CORS(app, resources={r"/*": {"origins": '*'}})
+cors = CORS(app, resources={r"/*": {"referrer-policy": "no-referrer"}})
 
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///chat-app-database"
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql-cubic-26621"
