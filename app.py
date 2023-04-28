@@ -7,8 +7,9 @@ import random
 import os
 
 app = Flask(__name__)
-port = int(os.environ.get("PORT", 5000))
-CORS(app)
+# port = int(os.environ.get("PORT", 5000))
+# CORS(app)
+cors = CORS(app)
 
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///chat-app-database"
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql-cubic-26621"
@@ -128,4 +129,5 @@ def get_code_by_name():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=port)
+    # app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=True, host="0.0.0.0")
