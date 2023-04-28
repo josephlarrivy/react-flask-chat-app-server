@@ -8,7 +8,7 @@ import os
 
 app = Flask(__name__)
 # port = int(os.environ.get("PORT", 5000))
-# CORS(app)
+CORS(app)
 cors = CORS(app)
 
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///chat-app-database"
